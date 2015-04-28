@@ -1,0 +1,38 @@
+/*
+REGISTRA USUARIO
+*/
+#subti{
+    text-align: center;
+    color: #455A64;
+}
+/*stilo de la tabla de usuario*/
+thead{
+    background-color: #455A64;
+    color: #FFFFFF;
+}
+/*hover de ta tabla de table-hover cambio de color*/
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: #faf2cc;
+}
+#cambios{
+  margin: 0 auto;
+  width: 10%;
+}
+#centrado{
+    width: 30%;
+    margin: 0 auto;
+}
+#btnbusca{
+    width: 25%;
+    margin: 0 auto;
+
+}
+#buscador{
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+#guardaCambios{
+
+  margin: 0 auto;
+}
