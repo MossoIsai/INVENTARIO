@@ -16,8 +16,8 @@
 
 
  //primer parametro para el StoreProcedure
- $consulta = mysql_query("CALL insertUsuario('".$_SESSION["ncontrol"]."','$nameUsuario','$apellido','$pass','$nempleado',$cargo,$priv)");
-   mysql_close($conex);
+ $consulta = mysqli_query($conex,"CALL insertUsuario('".$_SESSION["ncontrol"]."','$nameUsuario','$apellido','$pass','$nempleado',$cargo,$priv)");
+   mysqli_close($conex);
 
  header("Location:../super.php");
 

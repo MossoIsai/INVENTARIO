@@ -10,6 +10,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Bitacora</title>
     <link rel="stylesheet" href="css/principal.css"/>
 </head>
@@ -33,13 +34,13 @@
          <th>#</th>
          <th>NOMBRE</th>
          <th>CONSULTA</th>
-         <th>FECHA</th>
+         <th>FECHA LEVANTAMIENTO</th>
      </tr>
      </thead>
      <tbody>
      <?php
       include "controll/Conexion.php";
-       $resultado = mysql_query("CALL consulBit");
+       $resultado = mysqli_query($conex,"CALL consulBit");
 
      
      //funcion para modificar el mes
@@ -56,10 +57,10 @@
         return  $valorfinal = str_replace($mes, $valor, $cadena);
       }//fin del metodo
 
-        while($fila = mysql_fetch_array($resultado)){
+        while($fila = mysqli_fetch_array($resultado)){
           echo "<tr><td>$fila[0]</td><td>$fila[1]</td><td>$fila[2]</td><td>".modificaMes($fila[3])."</td></tr>";
         }
-       mysql_close($conex);
+       mysqli_close($conex);
      ?>
 
      </tbody>

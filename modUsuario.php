@@ -2,15 +2,19 @@
 <?php
   require_once("menu.php");
   session_start();
- if($_SESSION["sesionOk" !=  "si"]){
+ if($_SESSION["sesionOk"] !=  "si"){
     header("Location:index.php");
     exit;
  }
+  if(isset($_GET["datosnull"])){
+      echo "<script>alert('El usuario no se encuentra registrado en la Base de Datos')</script>";
+  }
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/principal.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Modifica Usuario</title>
 </head>
 <body>
@@ -36,12 +40,12 @@
                  <?php
                  include("controll/Conexion.php");
                  $contador = 1;
-                 $consulta =  mysql_query("CALL llenaCargo");
+                 $consulta =  mysqli_query($conex,"CALL llenaCargo");
 
                  while($fila = mysql_fetch_array($consulta)){
                      echo "<option value=".$contador++.">$fila[0]</option>";
                  }
-                 mysql_close($conex);
+                 mysqli_close($conex);
                  ?>
              </select> <br>
          </div>
@@ -51,12 +55,12 @@
                  <option value="">Selecciona un Privilegio</option>
                  <?php
                  include "controll/Conexion.php";
-                 $resultado =  mysql_query("CALL llenaPriv");
+                 $resultado =  mysqli_query($conex,"CALL llenaPriv");
                  $conta = 1;
                  while($fila = mysql_fetch_array($resultado)){
                      echo "<option value=".$conta++.">$fila[0]</option>";
                  }
-                 mysql_close($conex);
+                 mysqli_close($conex);
                  ?>
              </select><br>
          </div>

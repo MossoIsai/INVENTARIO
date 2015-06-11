@@ -10,9 +10,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/principal.css"/>
-    <title>Computadora</title>
+    <title>Información de los Dispositivos</title>
 </head>
 <body>
 <h3 id="subti">DISPOSITIVOS</h3>
@@ -38,18 +39,18 @@
         <th>#</th>
         <th>Dispositivo</th>
         <th>N.Serie</th>
-        <th>Precio</th>
-        <th>Fecha.Registro</th>
-        <th>Fecha.Compra</th>
-        <th>Reemplazado</th>
-        <th>Descripcion</th>
         <th>Marca</th>
         <th>Modelo</th>
+        <th>Fecha Levantamiento</th>
+        <th>Fecha Compra</th>
+        <th>Reemplazado</th>
+        <th>Descripcion</th>
         <th>Eje</th>
         <th>Tramo</th>
-        <th>Kilometro</th>
-        <th>Metro</th>
-        <th>Fotos</th>
+        <th>Cuerpo</th>
+        <th>Cadenamiento</th>
+        <th>Responsable</th>
+        <th>Fotografias_dispositivo</th>
     </tr>
     </thead>
     <tbody>
@@ -58,12 +59,12 @@
          include("controll/Conexion.php");
           include("controll/misMetodos.php");
           $contador = 1;
-          $consulta =  mysql_query(" CALL consultaDispositivos");
-          while($fila = mysql_fetch_array($consulta)){
-              echo "<tr><td>".$contador++."</td><td>$fila[0]</td><td>$fila[1]</td><td>$fila[2]</td><td>".modificaMes($fila[3])."</td><td>".modificaMes($fila[4]).
-                  "</td><td>".reemplazo($fila[5])."</td><td>$fila[6]</td><td>$fila[7]</td><td>$fila[8]</td><td>$fila[9]</td><td>$fila[10]</td><td>$fila[11]</td><td>$fila[12]</td><td><a href=''>$fila[13]</a></td> </tr>";
+          $consulta =  mysqli_query($conex," CALL consultaDispositivos");
+          while($fila = mysqli_fetch_row($consulta)){
+              echo "<tr><td>".$contador++."</td><td>$fila[0]</td><td>$fila[1]</td><td>$fila[2]</td><td>$fila[3]</td><td>".modificaMes($fila[4]).
+                  "</td><td>".modificaMes($fila[5])."</td><td>".reemplazo($fila[6])."</td><td>$fila[7]</td><td>$fila[8]</td><td>$fila[9]</td><td>$fila[10]</td><td>".cadenamiento($fila[11])."+".cadenamiento($fila[12])."</td><td>$fila[13]</td><td><a href=''>$fila[14]</a></td> </tr>";
           }
-       mysql_close($conex);
+       mysqli_close($conex);
        ?>
     </tbody>
 </table>

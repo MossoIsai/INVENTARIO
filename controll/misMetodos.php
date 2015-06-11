@@ -15,8 +15,19 @@ function modificaMes($cadena)
 function reemplazo($cadena){
     if($cadena == 0 ){
         return "NO";
-    } else{
+    } else if($cadena == 1){
         return "SI";
     }
+}
+function cadenamiento($valor){
+    $longitud = strlen($valor );
+    if($longitud == 3){
+        return $valor;
+    } else if($longitud == 2){
+        return "0".$valor;
+    } else if($longitud == 1){
+        return "00".$valor;
+    }
+
 }
 ?>

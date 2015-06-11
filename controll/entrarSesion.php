@@ -11,8 +11,8 @@ settype($pass,string);
   //Verifico si el usuario existe
   //con ese procedimiento tambien se saca la privlegio
 $md5pass = md5($pass);
-$ingresaUsuario =  mysql_query("CALL ingresaUsuario('$usuario','$md5pass')");
-$resultado = mysql_fetch_array($ingresaUsuario);
+$ingresaUsuario =  mysqli_query($conex,"CALL ingresaUsuario('$usuario','$md5pass')");
+$resultado = mysqli_fetch_array($ingresaUsuario);
 /*Imprimo para que ver que privilegio Tiene el Usuario
  Obtengo el Privilegio de la consulta anterior de la tabla USUARIO
 */
@@ -26,24 +26,24 @@ $resultado = mysql_fetch_array($ingresaUsuario);
 
       //obtener el numeroTrabajador  a travez de una variable global de $_SESSION['']
       $_SESSION['ncontrol'] = $usuario;
-      mysql_close($conex);
+      mysqli_close($conex);
 
   }else if($privilegio == 2){
       session_start();
       header("Location:../admon/admon.php");
       $_SESSION["sesionOk"] = "si";
       $_SESSION["ncontrol"] = $usuario;
-      mysql_close($conex);
+      mysqli_close($conex);
 
     }else if($privilegio == 3){
       session_start();
       header("Location: ../usuarios/compuUsuario.php");
       $_SESSION["sesionOk"] = "si";
       $_SESSION["ncontrol"] = $usuario;
-     mysql_close($conex);
+     mysqli_close($conex);
     }else{// DE OTRO MODO
       header("Location:../index.php?errorUsuario=1");
-      mysql_close($conex);
+      mysqli_close($conex);
   }
 
 ?>

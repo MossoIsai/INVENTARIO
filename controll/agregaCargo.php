@@ -8,8 +8,8 @@
   $cargo = $_POST['cargo'];
   settype($cargo,string);
 
-  mysql_query("CALL insertCargo('".$_SESSION["ncontrol"]."','$cargo')");
-  mysql_close($conex);
+  mysqli_query($conex,"CALL insertCargo('".$_SESSION["ncontrol"]."','$cargo')");
+  mysqli_close($conex);
 
   header("Location: ../super.php");
 

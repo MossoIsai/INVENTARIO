@@ -15,6 +15,7 @@
     <link rel="shortcut icon" href="img/android.png"/>
     <link rel="stylesheet" href="dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <body>
 	<div id="login">
