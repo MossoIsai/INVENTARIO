@@ -19,15 +19,20 @@ function reemplazo($cadena){
         return "SI";
     }
 }
-function cadenamiento($valor){
-    $longitud = strlen($valor );
-    if($longitud == 3){
+function cadenamiento($valor)
+{
+    $longitud = strlen($valor);
+    if ($longitud == 3) {
         return $valor;
-    } else if($longitud == 2){
-        return "0".$valor;
-    } else if($longitud == 1){
-        return "00".$valor;
+    } else if ($longitud == 2) {
+        return "0" . $valor;
+    } else if ($longitud == 1) {
+        return "00" . $valor;
     }
-
 }
-?>
+
+
+
+
+
+

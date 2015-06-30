@@ -6,7 +6,16 @@ if(! isset($_SESSION["ncontrol"])){
     exit;
 }
 $objeto = $_POST['objeto'];
-  mysqli_query($conex,"CALL insertObjetos('".$_SESSION["ncontrol"]."','$objeto')");
+  $repetido = mysqli_query($conex,"SELECT ObjNombre FROM OBJETO WHERE ObjNombre='$objeto'");
+   echo mysqli_error($conex);
+  //echo $objeto;
 
- header("Location: ../lista_dispo.php");
+  if(mysqli_num_rows($repetido) !=0){
+      header("Location: ../lista_dispo.php?repetido=1");
+
+  }else{
+
+      mysqli_query($conex,"CALL insertObjetos('".$_SESSION["ncontrol"]."','$objeto')");
+      header("Location: ../lista_dispo.php");
+  }
 ?>

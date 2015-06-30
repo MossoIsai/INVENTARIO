@@ -13,12 +13,11 @@
  $cargo = $_POST["cargo"];
  $priv = $_POST["privilegio"];
 
-
-
- //primer parametro para el StoreProcedure
- $consulta = mysqli_query($conex,"CALL insertUsuario('".$_SESSION["ncontrol"]."','$nameUsuario','$apellido','$pass','$nempleado',$cargo,$priv)");
-   mysqli_close($conex);
-
+$consulta = mysqli_query($conex,"CALL insertUsuario('".$_SESSION["ncontrol"]."','$nameUsuario','$apellido','$pass','$nempleado',$cargo,$priv)");
+ mysqli_close($conex);
  header("Location:../super.php");
+
+
+
 
 ?>
