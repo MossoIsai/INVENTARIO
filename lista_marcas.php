@@ -16,9 +16,8 @@ if($_SESSION["sesionOk"] != "si"){
     <link rel="stylesheet" href="dist/css/bootstrap.min.css"/>
 </head>
 <body>
-<h3 id="subti">Agregas Marcas</h3>
-<hr/>
 <center>
+    <h3 id="subti">Agregas Marcas</h3>
     <form method="post" action="controll/agregarMarca.php">
 
         <label>Ingresa el nombre de la Marca: </label>

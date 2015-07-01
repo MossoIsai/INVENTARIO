@@ -46,3 +46,28 @@ thead{
     margin: 0 auto;
 
 }
+#modpass{
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
+}
+#tab-small{
+ width: 200px;
+}
+#Eje{
+    width:  300px;
+}
+#eje{
+    width:  300px;
+}
+#tab-p{
+    width: 400px;
+}
+#tab-user{
+ padding-left: 5%;
+ padding-right: 5%;
+}
+/*modifica EJE*/
+#name_eje{
+    width: 40%;
+}

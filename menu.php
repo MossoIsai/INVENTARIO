@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if($_SESSION["sesionOk"] != "si"){
+    header("Location: index.php");
+    exit;
+}
+?>
 <html>
 <head lang="es">
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="img/android.png"/>
-    <link rel="stylesheet" href="dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css"/>
     <meta name="viewport" />
 </head>
 <body>
@@ -27,7 +34,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Listas<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="lista_dispo.php">Lista de Dispositvos</a></li>
-                    <li><a href="">Lista de Ejes</a></li>
+                    <li><a href="listaEjes.php">Lista de Ejes</a></li>
+                    <li><a href="listaTramos.php">Lista de Tramos</a></li>
                     <li><a href="lista_marcas.php">Lista de Marcas</a></li>
                     <li><a href="crearDirectorio.php">Crea Carpeta</a></li>
                 </ul>

@@ -12,6 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Bitacora</title>
+    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/zebra_pagination.css"/>
     <link rel="stylesheet" href="css/principal.css"/>
 </head>
 <body>
@@ -23,11 +25,8 @@
         <input type="text" class="form-control" name="buscar" id="buscador" placeholder="Buscar Registro" required=""><br>
     </div><br>
 </div> <!-- fin del buscador de la tabla-->
-
-
-
  <!-- Tabla reponsiva -->
- <div class="table-responsive">
+ <div class="table-responsive" >
   <table class="table table-hover table-bordered table-striped">
      <thead>
      <tr>
@@ -39,8 +38,19 @@
      </thead>
      <tbody>
      <?php
-      include "controll/Conexion.php";
-       $resultado = mysqli_query($conex,"CALL consulBit");
+     include "Zebra_Pagination.php";
+     include "controll/Conexion.php";
+
+     $query ="SELECT * FROM BITACORA";
+     $res = $conex->query($query);
+     $totalRegistros = mysqli_num_rows($res);//numero total de filas
+
+     $paginacion = new Zebra_Pagination();
+     $paginacion->records($totalRegistros);
+     $paginacion->records_per_page(50);
+     $inicio = ($paginacion->get_page()-1)* 50;
+
+       $resultado = mysqli_query($conex,"CALL consulBit($inicio,50)");
 
      
      //funcion para modificar el mes
@@ -65,6 +75,9 @@
 
      </tbody>
   </table>
+     <?php
+     $paginacion->render();
+     ?>
  </div>
 </body>
 </html>

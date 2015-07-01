@@ -1,19 +1,27 @@
-<!DOCTYPE html>
 <?php
-  require_once("menu.php");
-  session_start();
-  if($_SESSION["sesionOk"] != "si"){
+session_start();
+if($_SESSION["sesionOk"] != "si"){
     header("Location: index.php");
     exit;
- }
+}
+require_once 'Zebra_Pagination.php';
+require_once("menu.php");
 
+if(isset($_GET['repetido'])){
+    echo '<script>alert("El Dispositivo ya se encuentra Registrado");</script>';
+}
 
 ?>
+<!DOCTYPE html>
+
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="css/principal.css"/>
+    <link rel="stylesheet" href="css/zebra_pagination.css"/>
+    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/filtergrid.css"/>
+    <script type="text/javascript" src="js/tablefilter.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!--JQuery-->
     <script src="js/jquery.js">
@@ -22,7 +30,7 @@
 </head>
 <body>
 <h3 id="subti">Registrar Usuarios al Sistema </h3>
-  <div id="agregar" class="col-md-12">
+  <div id="agregar" class="col-md-12 hidden" >
       <form action="controll/registraUsuario.php" method="post">
       <div class="col-md-4">
           <input type="text" class="form-control" name="nombre" placeholder="Nombre" required="" id="nombre" /><br/>
@@ -69,23 +77,19 @@
 
 <!--Buscador de filtrado -->
 <center>
-  
-<div class="col-md-12"><br>
-    <div class="input-group input-group-lg" id="user">
-        <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-        <input type="text" class="form-control" name="buscar" id="buscador" placeholder="Buscar" required=""><br>
-    </div>
+    <button class="btn btn-primary" id="adduser">Agregar Usuario</button>
+
     <br/>
 </div>
 </center>
-<div class="table-responsive">
-<table class="table table-hover table-bordered table-striped">
+<div class="table-responsive" id="tab-user" >
+<table class="table table-hover table-bordered table-striped" id="tab-usuario" >
     <thead>
     <tr>
         <th>#</th>
         <th>NOMBRE</th>
         <th>APELLIDO</th>
-        <th>EM@IL</th>
+        <th>CORREO</th>
         <th>CARGO</th>
         <th>PRIVILEGIO</th>
         <th>ELIMINADOS</th>
@@ -93,32 +97,67 @@
     </thead>
     <tbody>
     <?php
-    $contadorUsuario = 1;
     //CONSULTA DE TABLA DE USUARIOS
-      include "controll/Conexion.php";
+    include "controll/Conexion.php";
+    include_once 'controll/modificaUsuario.php';
+    $conta = 1;
 
-       $result = mysqli_query($conex,"CALL consulUsuario");
+    //cuando registros tengo de la tabla
+    $query ="SELECT UsuNombre FROM USUARIO";
+    $res = $conex->query($query);
+    $totalRegistros = mysqli_num_rows($res);//numero total de filas
 
-       while($fila1 = mysqli_fetch_row($result)){
-           echo "<tr><td>".$contadorUsuario++."</td><td>$fila1[1]</td><td>$fila1[2]</td><td>$fila1[4]</td><td>$fila1[5]</td><td>$fila1[6]</td><td><center><input type='checkbox' disabled /></center></td></tr>";
-       }
-      mysqli_close($conex);
+    //registros por pagina
+    $resultXpages = 10;
+
+    $paginacion = new Zebra_Pagination();
+    $paginacion->records($totalRegistros);
+    $paginacion->records_per_page(10);
+    $inicio = (($paginacion->get_page()-1)*$resultXpages);
+
+    function statusUsuario($email,$status){
+        if($status == 0){
+            return '<center><a class="btn btn-danger" href="controll/modificaUsuario.php?email='.$email.'">Borrar</a></center>';
+        }else if($status == 1){
+            return  '<center><a class="btn btn-success" href="controll/modificaUsuario.php?email1='.$email.'">Activar</a></center>';
+        }
+    }
+    $result = mysqli_query($conex,"CALL consulUsuario($inicio,10)");
+    while($fila1 = mysqli_fetch_row($result)){
+    echo "<tr>
+        <td>".$conta++."</td>
+        <td>$fila1[1]</td>
+        <td>$fila1[2]</td>
+        <td>$fila1[4]</td>
+        <td>$fila1[5]</td>
+        <td>$fila1[6]</td>
+        <td>".statusUsuario($fila1[4],$fila1[7])."</td>
+
+    </tr>";
+    }
+    mysqli_close($conex);
     ?>
 
     </tbody>
 </table>
 </div>
+    <?php $paginacion->render(); ?>
 </body>
 <script type="text/javascript">
-    //Query para solo aceptar numeeros (nempleado)
-   /*$('#nempleado').keyup(function(){
+   //evento clock sobre agregar usuario
+   $('#adduser').click(function () {
+       $('#agregar').removeClass('hidden');
+       $('#adduser').addClass('hidden');
 
-     this.value = this.value.replace(/[^0-9]/g,'');
-   });*/
-
+   });
+    //evento sobres el evento del teclado para pasar a mayusculas
     $('#nombre,#apellido').keyup(function(){
        this.value = this.value.toUpperCase();
     });
 
+
+</script>
+<script>
+    var tf1 = setFilterGrid("tab-usuario");
 </script>
 </html>

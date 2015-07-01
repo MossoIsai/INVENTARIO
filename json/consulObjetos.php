@@ -1,6 +1,6 @@
 <?php
   include "../controll/Conexion.php";
-  $consulta =  mysqli_query($conex,"CALL consulObjetos");
+  $consulta =  mysqli_query($conex,"CALL consulObjetosJson");
   $jsonArray =  array();
    while($fila= mysqli_fetch_assoc($consulta)){
      $jsonObj['objeto'][] = $fila;

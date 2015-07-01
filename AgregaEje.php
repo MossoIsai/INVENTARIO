@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css"/>
