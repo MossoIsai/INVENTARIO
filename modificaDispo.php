@@ -17,7 +17,7 @@ if($_SESSION["sesionOk"] != "si"){
  <center><h3>INFORMACIÓN DEL DISPOSITIVO</h3><br/></center>
   <center>
      <div  id="principal">
-         <form action="" method="POST" >
+         <form action="controll/modificaDispositivo.php" method="POST" >
              <label>DISPOSITIVO</label>
              <?php
               include_once 'controll/Conexion.php';
@@ -29,6 +29,7 @@ if($_SESSION["sesionOk"] != "si"){
                    if($query ==  false) {
                        echo "error";
                    }else { //si la consulta efecitvamente funciona
+              echo '<input type="text" name="id"  value="'.$fila[11].'" class="hidden"/>'
              ?>
              <select name="dispositivo" id="dispositivo" class="form-control" disabled="true">
                  <?php
@@ -48,7 +49,7 @@ if($_SESSION["sesionOk"] != "si"){
                        echo "<label>NUMERO DE SERIE</label>
                    <input type='text'' class='form-control'  name='nserie' value='$numeroSerie' id='nserie' disabled/>";
                        echo "<label >FECHA LEVANTAMIENTO</label>
-                   <input type='date' class='form-control' id='fecha' name='fecha' value='$fecha[4]' disabled/>";
+                   <input type='date' class='form-control' id='fecha' name='fecha' value='$fila[4]' disabled/>";
                        echo "<label>MARCA</label>";
                        ?>
                        <select name="marca" id="marca" class="form-control" disabled><br/>
@@ -66,84 +67,84 @@ if($_SESSION["sesionOk"] != "si"){
 
                        echo "</select>
                        <label>MODELO</label><br/>
-                    <input type='text' class='form-control' value='$fila[3]' name='modelo' disabled/>
+                    <input type='text' class='form-control' value='$fila[3]' name='modelo' id='modelo' disabled/>
                        <label>REMPLAZADO</label><br/>"
                            ?>
                         <?php
                      if($fila[5] == "0"){
-                         echo "<label>No</label><input type='radio' name='reemplazo' value='0' checked disabled/>";
-                         echo "<label>Si</label><input type='radio' name='reemplazo' value='1' disabled/>";
+                         echo "<label>No</label><input type='radio' name='reemplazo' value='0' checked disabled id='reemplazoNo'/>";
+                         echo "<label>Si</label><input type='radio' name='reemplazo' value='1' disabled id='reemplazoSi'/>";
                      }else{
-                         echo "<label>No</label><input type='radio' name='reemplazo' value='0' disabled />";
-                         echo "<label>Si</label><input type='radio' name='reemplazo' value='1' checked  disabled/>";
+                         echo "<label>No</label><input type='radio' name='reemplazo' value='0' disabled id='reemplazoNo' />";
+                         echo "<label>Si</label><input type='radio' name='reemplazo' value='1' checked  disabled  id='reemplazoSi'/>";
                      }
                      ?>
                  <?php
                        echo "<br><label >DESCRIPCIÓN</label>
-                     <textarea id='descripcion' class='form-control' value='' name='descr' disabled>$fila[6]</textarea> ";
+                     <textarea id='descripcion' class='form-control' value='' name='descripcion' disabled>$fila[6]</textarea> ";
                        echo "<label>CADENAMIENTO</label><br>
                        <label>Kilometro</label>
-                       <input type='text' class='form-control' value='$fila[9]' disabled>
+                       <input type='text' class='form-control' value='$fila[9]'  id='kilometro'  name='kilometro' disabled>
                        <label>Metros</label>
-                       <input type='text' class='form-control' value='$fila[10]' disabled>
+                       <input type='text' class='form-control' value='$fila[10]' id='metro'  name='metro' disabled>
                        ";
                        echo "<label>CUERPO</label><br>";
                        ?>
                  <?php
                      if($fila[8] == "A"){
                      echo "<label>A</label>
-                    <input type='checkbox' name='cuerpo' checked disabled>
+                    <input type='checkbox' name='cuerpo[]' checked id='cuerpoA' disabled value='A'>
                     <label>B</label>
-                    <input type='checkbox' name='cuepo' disabled>
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoB' value='B'>
                     <label>C</label>
-                    <input type='checkbox' name='cuepo' disabled></br>";
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoC' value='C'></br>";
                      }else if($fila[8] == "B"){
                          echo "<label>A</label>
-                    <input type='checkbox' name='cuerpo' disabled>
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoA' value='A'>
                     <label>B</label>
-                    <input type='checkbox' name='cuepo' checked disabled>
+                    <input type='checkbox' name='cuerpo[]' checked disabled id='cuerpoB' value='B'>
                     <label>C</label>
-                    <input type='checkbox' name='cuepo' disabled ></br>";
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoC' value='C'></br>";
                      }else if($fila[8] == "C"){
                          echo "<label>A</label>
-                    <input type='checkbox' name='cuerpo' disabled>
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoA'value='A'>
                     <label>B</label>
-                    <input type='checkbox' name='cuepo' disabled>
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoB' value='B'>
                     <label>C</label>
-                    <input type='checkbox' name='cuepo' disabled></br>";
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoC' value='C'></br>";
                      }else if($fila[8] == "A/B"){
                          echo "<label>A</label>
-                    <input type='checkbox' name='cuerpo' checked disabled>
+                    <input type='checkbox' name='cuerpo[]' checked disabled id='cuerpoA' value='A'>
                     <label>B</label>
-                    <input type='checkbox' name='cuepo' checked disabled>
+                    <input type='checkbox' name='cuerpo[]' checked disabled id='cuerpoB' value='B'>
                     <label>C</label>
-                    <input type='checkbox' name='cuepo' disabled></br>";
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoC' value='C'></br>";
                      }else if($fila[8] == "A/C"){
                          echo "<label>A</label>
-                    <input type='checkbox' name='cuerpo' checked disabled>
+                    <input type='checkbox' name='cuerpo[]' checked disabled  id='cuerpoA' value='A'>
                     <label>B</label>
-                    <input type='checkbox' name='cuepo' disabled>
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpB' value='B'>
                     <label>C</label>
-                    <input type='checkbox' name='cuepo' checked disabled></br>";
+                    <input type='checkbox' name='cuerpo[]' checked disabled id='cuerpoC' value='C'></br>";
                      }else if($fila[8] == "B/C"){
                          echo "<label>A</label>
-                    <input type='checkbox' name='cuerpo' disabled>
+                    <input type='checkbox' name='cuerpo[]' disabled id='cuerpoA' value='A'>
                     <label>B</label>
-                    <input type='checkbox' name='cuepo' checked disabled>
+                    <input type='checkbox' name='cuerpo[]' checked disabled id='cuerpoB' value='B'>
                     <label>C</label>
-                    <input type='checkbox' name='cuepo' checked disabled></br>";
-
+                    <input type='checkbox' name='cuerpo[]' checked disabled id='cuerpoC' value='C'></br>";
                      }
 
                   ?>
              <?php
                   " <label>A</label>
-                    <input type='checkbox' name='cuerpo' disabled>
+                    <input type='checkbox' name='cuerpo' disabled id='cuerpoA'>
                     <label>B</label>
-                    <input type='checkbox' name='cuepo' disabled>
+                    <input type='checkbox' name='cuerpo' disabled id='cuerpoB'>
                     <label>C</label>
-                    <input type='checkbox' name='cuepo' disabled></br>";
+                    <input type='checkbox' name='cuerpo' disabled id='cuerpoC'></br>";
                        echo "<label>TRAMO</label>"?>
+
                            <select name="tramo" id="tramo" class="form-control" disabled><br/>
                                <?php
                                include("controll/Conexion.php");
@@ -160,15 +161,13 @@ if($_SESSION["sesionOk"] != "si"){
                   }
                  ?>
                         </select><br/>
-             <button class="btn btn-small btn-warning btn-block btn-lg" id="botonunlock" onclick="habilitar()">MODIFICAR</button>
-             <input type="submit" class="btn btn-small btn-success btn-block btn-lg" id="boton-save" value="GUARDAR" disabled/>
-
+                           <input type="submit" class="btn btn-small btn-success btn-block btn-lg" id="boton-save" value="GUARDAR"    disabled/>
          </form>
          <br/>
+         <button class="btn btn-small btn-warning btn-block btn-lg" id="botonunlock" onclick="habilitar()">MODIFICAR</button>
+         <br/><br/>
      </div>
-
   </center>
-
  <style>
      input[type='text']{
          width: 40%;
@@ -181,7 +180,7 @@ if($_SESSION["sesionOk"] != "si"){
          width: 80%;
          margin:  0 auto;
      }
-     #boton-save,#boton-cancelar,#botonunlock{
+     #boton-save,#botonunlock{
          width: 40%;
      }
 
@@ -189,14 +188,27 @@ if($_SESSION["sesionOk"] != "si"){
 <script>
     function habilitar() {
        document.getElementById("dispositivo").disabled = false;
-
+       document.getElementById("nserie").disabled = false;
+       document.getElementById("fecha").disabled = false;
+       document.getElementById("marca").disabled = false;
+       document.getElementById("modelo").disabled = false;
+       document.getElementById("reemplazoNo").disabled = false;
+       document.getElementById("reemplazoSi").disabled = false;
+       document.getElementById("descripcion").disabled = false;
+       document.getElementById("kilometro").disabled = false;
+       document.getElementById("metro").disabled = false;
+       document.getElementById("cuerpoA").disabled = false;
+       document.getElementById("cuerpoB").disabled = false;
+       document.getElementById("cuerpoC").disabled = false;
+       document.getElementById("tramo").disabled = false;
+       document.getElementById("boton-save").disabled = false;
+       document.getElementById("botonunlock").disabled = true;
 
     }
+
   $(window).load(function(){
      $("#dispositivo").disabled = true;
   });
-
-
-</script
+</script>
 </body>
 </html>

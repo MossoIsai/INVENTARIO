@@ -5,12 +5,13 @@ $filehandler = opendir($ruta);
 while($file = readdir($filehandler)){
     if($file != "." && $file != ".."){
         $tamano = getimagesize($ruta.$file);
-        echo "<div>
+        echo "
                  <div>
                   <img src ='$ruta$file' $tamano[3]>
-                 </div>
-                <div";
+                 <br>
+                </div>";
     }
 }
+
 closedir($filehandler);
 ?>

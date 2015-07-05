@@ -12,22 +12,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Bitacora</title>
-    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="css/zebra_pagination.css"/>
-    <link rel="stylesheet" href="css/principal.css"/>
+    <link rel="stylesheet" href="css/filtergrid.css"/>
+    <script type="text/javascript" src="js/tablefilter.js"></script>
+    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css"/>
 </head>
 <body>
- <h3 id="subti">Bitacora</h3>
- <!-- BUSCADOR-->
-<div class="col-md-12">
-    <div class="input-group input-group-lg" id="user">
-        <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-        <input type="text" class="form-control" name="buscar" id="buscador" placeholder="Buscar Registro" required=""><br>
-    </div><br>
-</div> <!-- fin del buscador de la tabla-->
+ <center><h3>Bitacora</h3></center>
  <!-- Tabla reponsiva -->
- <div class="table-responsive" >
-  <table class="table table-hover table-bordered table-striped">
+ <div class="table-responsive"  >
+  <table class="table table-hover table-bordered table-striped" id="tab-bitacora">
      <thead>
      <tr>
          <th>#</th>
@@ -79,5 +73,13 @@
      $paginacion->render();
      ?>
  </div>
+ <style>
+     .table tbody tr:hover td, .table tbody tr:hover th {
+         background-color: #faf2cc;
+     }
+ </style>
+<script>
+    var tabBitacora = setFilterGrid("tab-bitacora");
+</script>
 </body>
 </html>

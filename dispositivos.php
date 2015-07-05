@@ -83,7 +83,6 @@
                   echo "<tr class='success'><td>$fila2[0]</td><td>$fila2[1]</td><td>$fila2[2]</td><td>$fila2[3]</td></tr>";
               }
               ?>
-
               <?php
               echo "   </tbody>
                       </table>

@@ -33,25 +33,15 @@ if($_SESSION["sesionOk"] != "si"){
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Listas<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="lista_dispo.php">Lista de Dispositvos</a></li>
-                    <li><a href="listaEjes.php">Lista de Ejes</a></li>
-                    <li><a href="listaTramos.php">Lista de Tramos</a></li>
-                    <li><a href="lista_marcas.php">Lista de Marcas</a></li>
-                    <li><a href="crearDirectorio.php">Crea Carpeta</a></li>
+                    <li><a href="lista_dispo.php">Lista de dispositivos</a></li>
+                    <li><a href="listaEjes.php">Lista de ejes</a></li>
+                    <li><a href="listaTramos.php">Lista de tramos</a></li>
+                    <li><a href="lista_marcas.php">Lista de marcas</a></li>
+                    <li><a href="lista_componentes.php">Lista de componentes</a></li>
+
                 </ul>
             </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Modificar<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="modUsuario.php">Usuario</a></li>
-                    <li><a href="#">Computadora</a></li>
-                    <li><a href="#">ITS</a></li>
-                    <li><a href="#">Responsable</a></li>
-                    <li><a href="#">Mobiliario</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Eliminar Usuario</a></li>
-                </ul>
-            </li>
+
             <li><a href="bitacora.php">Bitacora</a></li>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="controll/cerrarSesion.php">Cerrar Sesion</a></li>

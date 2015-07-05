@@ -1,6 +1,6 @@
 <?php
 include "../controll/Conexion.php";
-$queryUsuarios = mysqli_query($conex,"CALL consulJsonMarcas");
+$queryUsuarios = mysqli_query($conex,"CALL consulMarca");
 $jsonObj = array();
 while($fila = mysqli_fetch_assoc($queryUsuarios)){
     $jsonObj['marca'][] = $fila;

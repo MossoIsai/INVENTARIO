@@ -17,11 +17,10 @@ if(isset($_GET['repetido'])){
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/principal.css"/>
     <link rel="stylesheet" href="css/zebra_pagination.css"/>
-    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="css/filtergrid.css"/>
     <script type="text/javascript" src="js/tablefilter.js"></script>
+    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!--JQuery-->
     <script src="js/jquery.js">
@@ -29,7 +28,7 @@ if(isset($_GET['repetido'])){
     <title>Usuarios</title>
 </head>
 <body>
-<h3 id="subti">Registrar Usuarios al Sistema </h3>
+<center><h3 >Registrar Usuarios al Sistema </h3></center>
   <div id="agregar" class="col-md-12 hidden" >
       <form action="controll/registraUsuario.php" method="post">
       <div class="col-md-4">
@@ -93,6 +92,7 @@ if(isset($_GET['repetido'])){
         <th>CARGO</th>
         <th>PRIVILEGIO</th>
         <th>ELIMINADOS</th>
+        <th>MODIFICAR</th>
     </tr>
     </thead>
     <tbody>
@@ -117,9 +117,9 @@ if(isset($_GET['repetido'])){
 
     function statusUsuario($email,$status){
         if($status == 0){
-            return '<center><a class="btn btn-danger" href="controll/modificaUsuario.php?email='.$email.'">Borrar</a></center>';
+            return '<center><a class="btn btn-success" href="controll/modificaUsuario.php?email='.$email.'">Activado</a></center>';
         }else if($status == 1){
-            return  '<center><a class="btn btn-success" href="controll/modificaUsuario.php?email1='.$email.'">Activar</a></center>';
+            return  '<center><a class="btn btn-danger" href="controll/modificaUsuario.php?email1='.$email.'">Borrado</a></center>';
         }
     }
     $result = mysqli_query($conex,"CALL consulUsuario($inicio,10)");
@@ -132,7 +132,7 @@ if(isset($_GET['repetido'])){
         <td>$fila1[5]</td>
         <td>$fila1[6]</td>
         <td>".statusUsuario($fila1[4],$fila1[7])."</td>
-
+        <td><a class='btn btn-small btn-warning ' href='modificaUsuario.php?emailUser=$fila1[4]'>Editar</a></td>
     </tr>";
     }
     mysqli_close($conex);
@@ -157,6 +157,12 @@ if(isset($_GET['repetido'])){
 
 
 </script>
+<style>
+    #tab-user{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+</style>
 <script>
     var tf1 = setFilterGrid("tab-usuario");
 </script>
